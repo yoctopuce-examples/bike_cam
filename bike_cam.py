@@ -11,11 +11,10 @@ from zeroconf import Zeroconf, ServiceBrowser
 import virb
 import datetime
 import threading
-from yocto_api import *
-from yocto_buzzer import YBuzzer
-from yocto_rangefinder import *
-from yocto_buzzer import *
-from yocto_accelerometer import *
+from yoctopuce.yocto_api import *
+from yoctopuce.yocto_buzzer import YBuzzer
+from yoctopuce.yocto_buzzer import *
+from yoctopuce.yocto_accelerometer import *
 from http.server import BaseHTTPRequestHandler, HTTPServer, SimpleHTTPRequestHandler
 from urllib import parse
 
@@ -122,39 +121,6 @@ class Detector(object):
 
     def set_off(self):
         self._is_trigered = False
-
-
-class RangeFinderDetector(Detector):
-    def __init__(self, app_ref, actions):
-        """
-
-        :type actions: Action[]
-        :type app_ref: App
-        """
-        super(RangeFinderDetector, self).__init__(app_ref, actions)
-        self._limit = 500
-        self._rf = YRangeFinder.FirstRangeFinder()
-        if self._rf is None:
-            self._app.fatal_error("No Rangefinder found")
-
-    def configure(self, hwid):
-        self._rf.set_reportFrequency("60/m")
-        self._rf.set_rangeFinderMode(YRangeFinder.RANGEFINDERMODE_DEFAULT)
-        self._rf.registerTimedReportCallback(self.periodicVal)
-
-    def periodicVal(self, rf, measure):
-        """
-
-        :param rf: YRangeFinder
-        :type measure: YMeasure
-        """
-
-        value = measure.get_minValue()
-        print("periodic val3: %f" % value)
-        if value < self._limit:
-            self.set_on()
-        else:
-            self.set_off()
 
 
 class Yocto3DDetector(Detector):

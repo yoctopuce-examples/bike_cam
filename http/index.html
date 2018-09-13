@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Bike cam</title>
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script>
 
 
@@ -51,36 +53,28 @@
 
         async function refreshUI(status) {
             duration = status['duration'];
-            document.getElementById('virb_status').innerHTML = status['virb'];
-            document.getElementById('y3d_status').innerHTML = status['y3d'];
-            document.getElementById('buzzer_status').innerHTML = status['buzzer'];
+            document.getElementById('virb_icon').src = status['virb'] === 'ok' ? 'ok.png' : 'err.png';
+            document.getElementById('y3d_icon').src = status['y3d'] === 'ok' ? 'ok.png' : 'err.png';
+            document.getElementById('buzzer_icon').src = status['buzzer'] === 'ok' ? 'ok.png' : 'err.png';
             document.getElementById('duration').value = duration;
         }
 
     </script>
-    <link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
-    <script src="http://vjs.zencdn.net/4.12/video.js"></script>
 </head>
 <body>
 <div id="content">
     <div id="status_bar">
-        <div id="buzzer_status">Elément 2</div>
-        <div id="y3d_status">Elément 1</div>
-        <div id="virb_status">Elément 3</div>
+        <div id="buzzer_status"><img id="buzzer_icon" src="err.png"></div>
+        <div id="y3d_status"><img id="y3d_icon" src="err.png"></div>
+        <div id="virb_status"><img id="virb_icon" src="err.png"></div>
     </div>
+    <h1>Record duration:</h1>
     <div id="duration_bar">
         <button id="minus" onclick="subDuration()">-</button>
-        <label for="duration">Duration</label><input type="text" id="duration" value="0"/>
+        <input type="text" id="duration" value="0"/>
         <button id="plus" onclick="addDuration();">+</button>
     </div>
 </div>
-<video id="MY_VIDEO_1" class="video-js vjs-default-skin" controls
-       preload="auto" width="640" height="264" poster="MY_VIDEO_POSTER.jpg"
-       data-setup="{}">
-    <source src="http://192.168.1.111/DCIM/103_VIRB/VIRB0084.MP4" type='video/mp4'>
-    <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a
-            href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
-</video>
 <script>setInterval(refresh, 1000);</script>
 </body>
 </html>

@@ -1,0 +1,67 @@
+
+body{
+    font-family: sans-serif;
+}
+
+#content {
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+
+#status_bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+#duration_bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+#buzzer_status {
+    background: url("buzzer.png") no-repeat center;
+}
+
+#y3d_status {
+    background: url("3d.png") no-repeat center;
+}
+
+#virb_status {
+    background: url("virb.png") no-repeat center;
+}
+
+#buzzer_status, #y3d_status, #virb_status {
+    height: 150px;
+    width: 200px;
+    background-size: auto;
+    position: relative;
+}
+
+#status_bar img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+}
+
+#minus, #plus {
+    height: 100px;
+    width: 200px;
+    font-size: xx-large;
+}
+
+h1{
+    text-align: center;
+}
+
+#duration {
+    font-size: xx-large;
+    text-align: center;
+}
