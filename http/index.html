@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bike cam</title>
+    <script>
+
+
+        async function yrequest(url) {
+            return new Promise(function (resolve, reject) {
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            resolve(JSON.parse(xhr.responseText));
+                        } else {
+                            reject(xhr.status)
+                        }
+                    }
+                };
+                xhr.ontimeout = function () {
+                    reject('timeout')
+                };
+                xhr.open('get', url, true)
+                xhr.send()
+            })
+        }
+
+
+        var duration = 0;
+
+        async function addDuration() {
+            duration += 1;
+            await refresh("?duration=" + duration);
+        }
+
+        async function subDuration() {
+            if (duration > 1)
+                duration -= 1;
+            await refresh("?duration=" + duration);
+        }
+
+        async function refresh(args = null) {
+            let url = "/status.json";
+            if (args != null) {
+                url += args;
+            }
+            let status = await yrequest(url);
+            refreshUI(status);
+        }
+
+        async function refreshUI(status) {
+            duration = status['duration'];
+            document.getElementById('virb_status').innerHTML = status['virb'];
+            document.getElementById('y3d_status').innerHTML = status['y3d'];
+            document.getElementById('buzzer_status').innerHTML = status['buzzer'];
+            document.getElementById('duration').value = duration;
+        }
+
+    </script>
+    <link href="http://vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
+    <script src="http://vjs.zencdn.net/4.12/video.js"></script>
+</head>
+<body>
+<div id="content">
+    <div id="status_bar">
+        <div id="buzzer_status">Elément 2</div>
+        <div id="y3d_status">Elément 1</div>
+        <div id="virb_status">Elément 3</div>
+    </div>
+    <div id="duration_bar">
+        <button id="minus" onclick="subDuration()">-</button>
+        <label for="duration">Duration</label><input type="text" id="duration" value="0"/>
+        <button id="plus" onclick="addDuration();">+</button>
+    </div>
+</div>
+<video id="MY_VIDEO_1" class="video-js vjs-default-skin" controls
+       preload="auto" width="640" height="264" poster="MY_VIDEO_POSTER.jpg"
+       data-setup="{}">
+    <source src="http://192.168.1.111/DCIM/103_VIRB/VIRB0084.MP4" type='video/mp4'>
+    <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a
+            href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+</video>
+<script>setInterval(refresh, 1000);</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+[Unit]
+Description=Record bike with Garmin Virb camera
+[Service]
+Type=simple
+ExecStart=/home/pi/bike_cam/bike_cam.py
+[Install]
+WantedBy=multi-user.target
