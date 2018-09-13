@@ -1,5 +1,5 @@
 
-body{
+body {
     font-family: sans-serif;
 }
 
@@ -11,17 +11,11 @@ body{
 
 }
 
-#status_bar {
+#status_bar, #duration_bar {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-
-}
-
-#duration_bar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    flex-wrap: wrap
 
 }
 
@@ -57,7 +51,7 @@ body{
     font-size: xx-large;
 }
 
-h1{
+h1 {
     text-align: center;
 }
 
