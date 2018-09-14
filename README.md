@@ -11,4 +11,4 @@ is started.
 
 ![The system is composed of a Yocto-3D-V2, a Yocto-Buzzer, a Raspberry Pi, and a Garmin camera](https://www.yoctopuce.com/pubarchive/2018-09/big_picture_1.png)
 
-
+The system is composed of a Yocto-3D-V2, a Yocto-Buzzer, a Raspberry Pi, and a Garmin camera
