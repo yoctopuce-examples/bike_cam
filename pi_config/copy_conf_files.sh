@@ -15,3 +15,7 @@ cp hostapd.conf /etc/hostapd
 echo "copy /etc/default/hostapd"
 cp /etc/default/hostapd "/etc/default/hostapd-$(date +"%m-%d-%y-%r")"
 cp hostapd /etc/default
+
+
+mkdir -p /home/pi/.config/autostart
+cp chromium-fullscreen.desktop /home/pi/.config/autostart
